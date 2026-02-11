@@ -1,0 +1,709 @@
+/* ==================== GLOBAL STYLES ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-pink: #ff6b9d;
+    --secondary-pink: #ffc2d1;
+    --light-pink: #fff0f3;
+    --deep-red: #c9184a;
+    --white: #ffffff;
+    --text-dark: #2d2d2d;
+    --text-light: #666666;
+    --gradient-romantic: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffc2d1 100%);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--light-pink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+}
+
+/* ==================== FLOATING HEARTS ==================== */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 8s ease-in infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ==================== SECTIONS ==================== */
+.section {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.section.active {
+    display: flex;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: var(--deep-red);
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+/* ==================== INTRO SECTION ==================== */
+#intro {
+    background: var(--gradient-romantic);
+    text-align: center;
+}
+
+.intro-content {
+    max-width: 600px;
+}
+
+.intro-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1.3;
+}
+
+.intro-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 50px;
+}
+
+.heart-btn {
+    background: var(--white);
+    border: none;
+    padding: 20px 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(201, 24, 74, 0.3);
+    transition: all 0.3s ease;
+}
+
+.heart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(201, 24, 74, 0.4);
+}
+
+.heart-icon {
+    font-size: 2.5rem;
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.btn-text {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--deep-red);
+}
+
+/* ==================== TIMELINE SECTION ==================== */
+#timeline {
+    background: var(--light-pink);
+    padding: 60px 20px;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-romantic);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-content {
+    flex: 1;
+    padding: 30px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 50px;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 50px;
+    text-align: left;
+}
+
+.timeline-date {
+    display: inline-block;
+    background: var(--gradient-romantic);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.timeline-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--deep-red);
+    margin-bottom: 10px;
+}
+
+.timeline-text {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--deep-red);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 0 5px var(--secondary-pink);
+}
+
+.timeline-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+/* ==================== REASONS SECTION ==================== */
+#reasons {
+    background: linear-gradient(180deg, var(--light-pink) 0%, var(--white) 100%);
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.reason-card {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.reason-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-romantic);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.reason-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.25);
+}
+
+.reason-card:hover::before {
+    opacity: 1;
+}
+
+.reason-card:hover .reason-icon,
+.reason-card:hover .reason-title,
+.reason-card:hover .reason-text {
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.reason-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    display: block;
+    transition: all 0.4s ease;
+}
+
+.reason-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--deep-red);
+    margin-bottom: 15px;
+    transition: color 0.4s ease;
+}
+
+.reason-text {
+    color: var(--text-light);
+    line-height: 1.6;
+    transition: color 0.4s ease;
+}
+
+/* ==================== MUSIC SECTION ==================== */
+#music {
+    background: var(--gradient-romantic);
+}
+
+.music-player {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 50px 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.album-cover {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.album-cover.playing img {
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vinyl-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.player-info {
+    margin-bottom: 30px;
+}
+
+.song-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--deep-red);
+    margin-bottom: 5px;
+}
+
+.artist-name {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--light-pink);
+    color: var(--deep-red);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: var(--secondary-pink);
+    transform: scale(1.1);
+}
+
+.play-btn {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-romantic);
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.play-btn:hover {
+    background: var(--deep-red);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.time {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    min-width: 35px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--light-pink);
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-romantic);
+    border-radius: 3px;
+    transition: width 0.1s linear;
+}
+
+/* ==================== LETTER SECTION ==================== */
+#letter {
+    background: linear-gradient(180deg, var(--secondary-pink) 0%, var(--light-pink) 100%);
+    padding: 60px 20px;
+}
+
+.letter-container {
+    max-width: 700px;
+    width: 100%;
+    perspective: 1000px;
+}
+
+.letter-paper {
+    background: var(--white);
+    border-radius: 5px;
+    padding: 50px;
+    box-shadow: 
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 20px 50px rgba(0,0,0,0.1),
+        inset 0 0 100px rgba(255, 107, 157, 0.05);
+    position: relative;
+    background-image: 
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            rgba(255, 107, 157, 0.1) 31px,
+            rgba(255, 107, 157, 0.1) 32px
+        );
+    background-position: 0 50px;
+}
+
+.letter-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 107, 157, 0.2);
+}
+
+.letter-header {
+    text-align: right;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--secondary-pink);
+}
+
+.letter-date {
+    font-style: italic;
+    color: var(--text-light);
+}
+
+.letter-content {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    line-height: 2;
+    color: var(--text-dark);
+    min-height: 200px;
+}
+
+.letter-content .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.5rem;
+    background: var(--deep-red);
+    animation: blink 0.7s infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.letter-signature {
+    text-align: right;
+    margin-top: 40px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: var(--deep-red);
+}
+
+.signature-heart {
+    display: block;
+    font-size: 2rem;
+    margin-top: 10px;
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+/* ==================== FINAL MESSAGE ==================== */
+.final-message {
+    text-align: center;
+    margin-top: 60px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s ease;
+}
+
+.final-message.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.final-message h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: var(--deep-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.heart-burst {
+    position: relative;
+    height: 100px;
+    margin-top: 30px;
+}
+
+/* ==================== NAVIGATION BUTTONS ==================== */
+.next-btn {
+    background: var(--white);
+    border: 2px solid var(--primary-pink);
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-pink);
+    cursor: pointer;
+    margin-top: 50px;
+    transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+    background: var(--primary-pink);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+}
+
+#music .next-btn {
+    background: transparent;
+    border-color: var(--white);
+    color: var(--white);
+}
+
+#music .next-btn:hover {
+    background: var(--white);
+    color: var(--primary-pink);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 2.5rem;
+    }
+    
+    .intro-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .timeline-container::before {
+        left: 20px;
+    }
+    
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        flex-direction: column;
+        padding-left: 50px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin: 0;
+        text-align: left;
+    }
+    
+    .timeline-dot {
+        left: 20px;
+        transform: translateX(-50%);
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .music-player {
+        padding: 30px 20px;
+    }
+    
+    .album-cover {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .letter-paper {
+        padding: 30px 20px 30px 40px;
+    }
+    
+    .letter-content {
+        font-size: 1.2rem;
+    }
+    
+    .final-message h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-title {
+        font-size: 2rem;
+    }
+    
+    .heart-btn {
+        padding: 15px 35px;
+    }
+    
+    .heart-icon {
+        font-size: 2rem;
+    }
+    
+    .btn-text {
+        font-size: 1.1rem;
+    }
+}
