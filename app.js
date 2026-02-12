@@ -68,10 +68,35 @@ function renderTimeline() {
                 <span class="timeline-date">${item.date}</span>
                 <h3 class="timeline-title">${item.title}</h3>
                 <p class="timeline-text">${item.text}</p>
-                <img src="${item.image}" alt="${item.title}" class="timeline-image">
+                <img 
+                    src="${item.image}" 
+                    alt="${item.title}" 
+                    class="timeline-image loading"
+                    loading="lazy"
+                    decoding="async"
+                >
             </div>
             <div class="timeline-dot"></div>
         `;
+        
+        // Görsel yükleme kontrolü
+        const img = timelineItem.querySelector('.timeline-image');
+        
+        img.onload = function() {
+            this.classList.remove('loading');
+            this.classList.add('loaded');
+        };
+        
+        img.onerror = function() {
+            this.classList.remove('loading');
+            this.classList.add('error');
+            // Fallback placeholder
+            this.src = `https://picsum.photos/400/250?random=${index}`;
+            this.onload = function() {
+                this.classList.remove('error');
+                this.classList.add('loaded');
+            };
+        };
         
         container.appendChild(timelineItem);
         
@@ -106,63 +131,87 @@ function renderReasons() {
 
 // ==================== MUSIC PLAYER ====================
 function setupMusicPlayer() {
+    const audio = document.getElementById('audioPlayer');
     const playBtn = document.getElementById('playBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const progress = document.getElementById('musicProgress');
+    const progressBar = document.querySelector('.progress-bar');
     const albumCover = document.querySelector('.album-cover');
     const currentTimeEl = document.querySelector('.time.current');
+    const totalTimeEl = document.getElementById('totalTime');
+    const volumeSlider = document.getElementById('volumeSlider');
     
-    let isPlaying = false;
-    let progressInterval;
-    let currentProgress = 0;
-    const totalDuration = 225; // 3:45 in seconds
+    // Ses seviyesi ayarla
+    audio.volume = 0.7;
     
+    // Metadata yüklenince toplam süreyi göster
+    audio.addEventListener('loadedmetadata', () => {
+        const duration = audio.duration;
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        totalTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    });
+    
+    // Play/Pause butonu
     playBtn.addEventListener('click', () => {
-        isPlaying = !isPlaying;
-        
-        if (isPlaying) {
+        if (audio.paused) {
+            audio.play();
             playBtn.textContent = '⏸';
             albumCover.classList.add('playing');
-            
-            // Progress animasyonu
-            progressInterval = setInterval(() => {
-                if (currentProgress < 100) {
-                    currentProgress += 0.1;
-                    progress.style.width = currentProgress + '%';
-                    
-                    // Zaman güncelle
-                    const currentSeconds = Math.floor((currentProgress / 100) * totalDuration);
-                    const minutes = Math.floor(currentSeconds / 60);
-                    const seconds = currentSeconds % 60;
-                    currentTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                } else {
-                    clearInterval(progressInterval);
-                    isPlaying = false;
-                    playBtn.textContent = '▶';
-                    albumCover.classList.remove('playing');
-                    currentProgress = 0;
-                    progress.style.width = '0%';
-                    currentTimeEl.textContent = '0:00';
-                }
-            }, 100);
         } else {
+            audio.pause();
             playBtn.textContent = '▶';
             albumCover.classList.remove('playing');
-            clearInterval(progressInterval);
         }
     });
     
-    // Progress bar tıklama
-    document.querySelector('.progress-bar').addEventListener('click', (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const clickPosition = (e.clientX - rect.left) / rect.width;
-        currentProgress = clickPosition * 100;
-        progress.style.width = currentProgress + '%';
+    // Zaman güncelleme
+    audio.addEventListener('timeupdate', () => {
+        const currentTime = audio.currentTime;
+        const duration = audio.duration;
         
-        const currentSeconds = Math.floor(clickPosition * totalDuration);
-        const minutes = Math.floor(currentSeconds / 60);
-        const seconds = currentSeconds % 60;
-        currentTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        if (duration) {
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = progressPercent + '%';
+            
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = Math.floor(currentTime % 60);
+            currentTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
     });
+    
+    // Şarkı bittiğinde
+    audio.addEventListener('ended', () => {
+        playBtn.textContent = '▶';
+        albumCover.classList.remove('playing');
+        progress.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+    });
+    
+    // Başa sar butonu
+    prevBtn.addEventListener('click', () => {
+        audio.currentTime = 0;
+    });
+    
+    // 10 saniye ileri butonu
+    nextBtn.addEventListener('click', () => {
+        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+    });
+    
+    // Progress bar tıklama
+    progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const clickPosition = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = clickPosition * audio.duration;
+    });
+    
+    // Ses seviyesi kontrolü
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+    }
 }
 
 // ==================== NAVIGATION ====================

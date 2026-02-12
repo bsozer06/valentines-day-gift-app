@@ -6,59 +6,55 @@ const DATA = {
     // DEĞİŞTİR: Tarihleri, başlıkları ve açıklamaları kendi anılarınızla değiştirin
     timeline: [
         {
-            date: "15 Ocak 2023",
-            title: "İlk Tanıştığımız Gün",
+            date: "Mayıs 2025",
+            title: "İlk Tanıştığımız Ay",
             text: "Hayatımın en güzel sürpriziydin. O gün her şey değişti...",
-            image: "https://picsum.photos/400/200?random=1"
+            image: "./assets/first.jpg"
         },
         {
-            date: "14 Şubat 2023",
-            title: "İlk Sevgililer Günümüz",
-            text: "Seninle ilk kutladığımız özel gün. Ne kadar heyecanlıydık!",
-            image: "https://picsum.photos/400/200?random=2"
-        },
-        {
-            date: "20 Haziran 2023",
+            date: "17 Eylül 2023",
             title: "İlk Tatilimiz",
             text: "Birlikte keşfettiğimiz yerler, paylaştığımız anlar...",
-            image: "https://picsum.photos/400/200?random=3"
+            image: "./assets/holiday.jpg"
         },
         {
-            date: "10 Aralık 2023",
-            title: "Yıldönümümüz",
-            text: "Bir yıl geçmiş, sanki dün gibi. Seninle her gün bir bayram.",
-            image: "https://picsum.photos/400/200?random=4"
+            date: "30 Ekim 2025",
+            title: "İlk Tatilimiz",
+            text: "Birlikte keşfettiğimiz yerler, paylaştığımız anlar...",
+            image: "./assets/holiday.jpg"
         },
         {
-            date: "1 Ocak 2024",
+            date: "1 Ocak 2026",
             title: "Yeni Yıl Birlikte",
             text: "Yeni yıla seninle girmek, en güzel dilek oldu.",
-            image: "https://picsum.photos/400/200?random=5"
-        }
+            image: "./assets/newyear.jpg"
+        },        
+        {
+            date: "14 Şubat 2026",
+            title: "Doğum Günün",
+            text: "Seninle ilk kutladığımız özel gün. Ne kadar heyecanlıydık!",
+            image: "./assets/birthday.jpg"
+        },
+        
     ],
 
     // Sebepler - Onu sevme nedenleriniz
     // DEĞİŞTİR: Kendi nedenlerinizi ve emojileri ekleyin
-    reasons: [
+     reasons: [
+        {
+            icon: "💖",
+            title: "Güzelliğin",
+            text: "Güzelliğin ve zarafetin, hayatıma renk ve ilham katıyor. Seninle her şey daha güzel görünüyor."
+        },
         {
             icon: "😊",
             title: "Gülüşün",
             text: "Gülüşün odayı aydınlatıyor. Her gördüğümde içim ısınıyor."
         },
         {
-            icon: "💪",
-            title: "Gücün",
-            text: "Her durumda güçlü kalabilmen, bana da güç veriyor."
-        },
-        {
             icon: "🤗",
             title: "Şefkatin",
             text: "Herkese gösterdiğin sevgi ve şefkat, seni özel kılıyor."
-        },
-        {
-            icon: "🎨",
-            title: "Yaratıcılığın",
-            text: "Hayata bakış açın, her şeyi daha renkli yapıyor."
         },
         {
             icon: "🌟",
@@ -70,7 +66,7 @@ const DATA = {
             title: "Kalbin",
             text: "Kocaman kalbin, sonsuz sevgin... Sen bir harikasın."
         }
-    ],
+    ],  
 
     // Mektup - Romantik mesajınız
     // DEĞİŞTİR: Kendi mektubunuzu yazın
@@ -80,7 +76,7 @@ Bu satırları yazarken yüreğim sevinçle atıyor. Seninle geçirdiğim her an
 
 İlk tanıştığımız günü hatırlıyor musun? O andan itibaren dünyam değişti. Sen benim en güzel tesadüfüm, en büyük şansım oldun.
 
-Seninle güldüm, ağladım, hayaller kurdum. Her zorluğun üstesinden birlikte geldik. Sen yanımdayken her şey mümkün.
+Seninle yeri geldik güldük, üzüldük ve hayaller kurduk. Her zorluğun üstesinden birlikte geldik ve geleceğiz. Sen yanımdayken her şey mümkün.
 
 Gözlerindeki ışık, gülüşündeki sıcaklık, kalbimdeki yerin... Hiçbiri tarif edilemez.
 
