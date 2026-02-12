@@ -19,9 +19,9 @@ const DATA = {
         },
         {
             date: "30 Ekim 2025",
-            title: "İlk Tatilimiz",
-            text: "Birlikte keşfettiğimiz yerler, paylaştığımız anlar...",
-            image: "./assets/holiday.jpg"
+            title: "Aşkımın Doğum Günü",
+            text: "O özel gün, seninle kutlamak benim için tarifsiz bir mutluluktu.",
+            image: "./assets/birthday.jpg"
         },
         {
             date: "1 Ocak 2026",
@@ -31,9 +31,9 @@ const DATA = {
         },        
         {
             date: "14 Şubat 2026",
-            title: "Doğum Günün",
+            title: "Sevgililer Günü",
             text: "Seninle ilk kutladığımız özel gün. Ne kadar heyecanlıydık!",
-            image: "./assets/birthday.jpg"
+            image: "./assets/dayy.jpg"
         },
         
     ],
